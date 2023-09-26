@@ -3,11 +3,6 @@ name: Deployment
 on:
   workflow_dispatch:
     inputs:
-      confirmation:
-        type: boolean
-        description: Check to confirm deployment
-        default: false
-        required: true
       environment:
         description: Environment to be deployed on
         type: environment
@@ -16,7 +11,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.event.inputs.confirmation == true
 
     steps:
     - name: Checkout code
