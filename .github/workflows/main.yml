@@ -16,13 +16,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # if: github.event.inputs.confirmation == true
+    if: github.event.inputs.confirmation == true
 
     steps:
-    # - name: Set output
-    #   id: vars
-    #   run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
-
     - name: Checkout code
       uses: actions/checkout@v4
       with:
