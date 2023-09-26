@@ -19,16 +19,16 @@ jobs:
     if: github.event.inputs.confirmation == true
 
     steps:
-    - name: Set output
-      id: vars
-      run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+    # - name: Set output
+    #   id: vars
+    #   run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
 
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-        ref: ${{ steps.vars.outputs.short_ref }}
+        ref: ${{ github.ref_name }}
 
     - name: Build Docker image
       run: |
-        docker build -t my-python-app:${{ steps.vars.outputs.short_ref }} .
+        docker build -t my-python-app:${{ github.ref_name }} .
         docker images
