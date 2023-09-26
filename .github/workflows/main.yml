@@ -6,8 +6,8 @@ on:
       confirmation:
         type: boolean
         description: Check to confirm deployment
-        required: true
         default: false
+        required: true
       environment:
         description: Environment to be deployed on
         type: environment
@@ -16,8 +16,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event.inputs.confirmation == true
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    #   with:
+    #     ref: ${{ github.event.inputs.branch_or_tag }}
+
     - name: Build Docker image
       run: |
         docker build -t my-python-app .
