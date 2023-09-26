@@ -11,6 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
 
     steps:
     - name: Checkout code
@@ -22,3 +23,8 @@ jobs:
       run: |
         docker build -t my-python-app:${{ github.ref_name }} .
         docker images
+
+    - name: Show environment msg
+      run: |
+        echo ${{ github.event.inputs.environment }}
+        echo ${{ secrets.msg }}
