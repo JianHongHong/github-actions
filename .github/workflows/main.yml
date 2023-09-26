@@ -1,4 +1,5 @@
-name: Deployment
+name: Deployment using tags/branch
+run-name: "Deploy on ${{ github.event.inputs.environment }} with ${{ github.ref_name }} by: ${{ github.actor }}"
 
 on:
   workflow_dispatch:
