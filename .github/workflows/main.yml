@@ -29,3 +29,22 @@ jobs:
       run: |
         echo ${{ github.event.inputs.environment }}
         echo ${{ secrets.msg }}
+
+  demo:
+    name: Deploy on ${{ github.event.inputs.environment }}
+    environment: ${{ github.event.inputs.environment }}
+    needs: 
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout docker-compose file(new changes)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          sparse-checkout: |
+            docker-compose.yml
+          sparse-checkout-cone-mode: false
+
+      - name: Show environment msg
+        run: |
+          cat docker-compose.yml
